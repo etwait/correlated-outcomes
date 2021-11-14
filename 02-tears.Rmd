@@ -1,30 +1,34 @@
 ## Running the analysis
 
+## Use case
+In this use case, we are examining the association between social support and seven highly correlated outcomes: volumes of subfields within the hippocampus collected on brain MRI.
+
 ## Let's specify the packages needed:
-library(reshape2) ## for the 'melt' function
-library(nlme) ## for our multivariate model
+`library(reshape2)` (for the 'melt' function)
+
+`library(nlme)` (for our multivariate models)
 
 ## Let's set our working directory:
-setwd()
+`setwd()`
 
 ## Load in our data:
-coroutcomes <- read.csv(file = "coroutcomes.csv", header = TRUE)
+`coroutcomes <- read.csv(file = "coroutcomes.csv", header = TRUE)`
 
 ## Convert our data into a format relevant for multivariate analysis
-coroutcomes_melt <- melt(hippocomplete2_long[, c(".imp", "id", "AgeMRI7T", "sex", "ZICV_mm3", "socsup3","depsymptoms", "emo_ab", "psy_ab", "phys_ab", "sex_ab", "LE", "BAI_cat1", "child_mal", "ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum", "Zbrain_corrected_mm3", "brain_corrected_mm3", "Tailsum", "SUBsum", "ERCsum", "DGsum", "CA3sum", "CA2sum", "CA1sum", "ZHIPPsum", "HIPPsum", "HIPP_L", "HIPP_R")], measure.vars = c("ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum"))
+`coroutcomes_melt <- melt(hippocomplete2_long[, c(".imp", "id", "AgeMRI7T", "sex", "ZICV_mm3", "socsup3","depsymptoms", "emo_ab", "psy_ab", "phys_ab", "sex_ab", "LE", "BAI_cat1", "child_mal", "ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum", "Zbrain_corrected_mm3", "brain_corrected_mm3", "Tailsum", "SUBsum", "ERCsum", "DGsum", "CA3sum", "CA2sum", "CA1sum", "ZHIPPsum", "HIPPsum", "HIPP_L", "HIPP_R")], measure.vars = c("ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum"))`
 
-Here, we are telling R to select our outcomes, that is, seven hippocampal subfields, "ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum" and creating a new categorical variable called "variable" for them as well as our new outcome variable "value" that holds the values for all subfields.
+Here, we are telling R to select our outcomes, the seven hippocampal subfields ("ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum") and creating a new categorical variable called "variable" for them as well as our new outcome variable "value" that holds the values for all subfields.
 
 ## Model building
 
-socialsupport <- gls(value ~ -1 + variable + variable:factor(socsup3) + variable:AgeMRI7T +
+`socialsupport <- gls(value ~ -1 + variable + variable:factor(socsup3) + variable:AgeMRI7T +
                        variable:sex + variable:ZICV_mm3, data = coroutcomes_melt, method = "ML",
-                     correlation=corSymm(form = ~1 | id), weights = varIdent(form = ~1 | variable))
+                     correlation=corSymm(form = ~1 | id), weights = varIdent(form = ~1 | variable))`
 
 Here, we add '-1' to withhold the intercept for ease of interpretation. We add here our main predictor, in this case social support or 'socsup3', as well as our covariates: age, sex, and intracranial volume. We specify an unstructured correlation matrix per individual ('id') and for each outcome ('variable').
 
 Now let's compare our results to performing a univariate analysis:
-socialsupport.univariate <- lm(ZCA1sum ~ factor(socsup3) + AgeMRI7T + sex + ZICV_mm3, data = coroutcomes)
+`socialsupport.univariate <- lm(ZCA1sum ~ factor(socsup3) + AgeMRI7T + sex + ZICV_mm3, data = coroutcomes)`
 
 Let's compare our estimates:
 

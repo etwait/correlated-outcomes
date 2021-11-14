@@ -6,10 +6,10 @@ site: bookdown::bookdown_site
 bibliography: references.bib
 ---
 
-# Multivariate analyses with correlated outcomes
+# Background
 Do you have correlated outcomes but unsure of how to perform multivariate analysis in R? Then you’re in the right place!
 
 Previous literature has shown the importance of multivariate over univariate analyses when one has multiple correlated outcomes. Multivariate approaches increase the power of the model as well as reducing type I error. [@johnson2014; @mishra2021]
 
-While multivariate analyses have been around for a while, they are not often used in research, perhaps due to lack of awareness and complex mathematical and statistical methods. So, let’s increase awareness. Let’s learn how to perform a multivariate analysis in R! Step by step.
+While multivariate analyses have been around for a while, they are not often used in research, perhaps due to lack of awareness and complex mathematical and statistical methods. So, let’s increase awareness and learn how to perform a multivariate analysis in R! Step by step.
 

@@ -1,5 +1,6 @@
-multivariate-analyses-with-correlated-outcomes
+background
 running-the-analysis
+use-case
 lets-specify-the-packages-needed
 lets-set-our-working-directory
 load-in-our-data
