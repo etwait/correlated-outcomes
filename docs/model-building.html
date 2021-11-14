@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R</title>
-  <meta name="description" content="Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R" />
+  <title>Chapter 7 Model building | Multivariate analysis with correlated outcomes in R</title>
+  <meta name="description" content="Chapter 7 Model building | Multivariate analysis with correlated outcomes in R" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R" />
+  <meta property="og:title" content="Chapter 7 Model building | Multivariate analysis with correlated outcomes in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R" />
+  <meta name="twitter:title" content="Chapter 7 Model building | Multivariate analysis with correlated outcomes in R" />
   
   
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Emma L. Twait" />
 
 
-<meta name="date" content="2021-11-13" />
+<meta name="date" content="2021-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="model-building.html"/>
-
+<link rel="prev" href="convert-our-data-into-a-format-relevant-for-multivariate-analysis.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -53,6 +53,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 
@@ -102,7 +104,7 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="load-in-our-data.html"><a href="load-in-our-data.html"><i class="fa fa-check"></i><b>5</b> Load in our data</a></li>
 <li class="chapter" data-level="6" data-path="convert-our-data-into-a-format-relevant-for-multivariate-analysis.html"><a href="convert-our-data-into-a-format-relevant-for-multivariate-analysis.html"><i class="fa fa-check"></i><b>6</b> Convert our data into a format relevant for multivariate analysis</a></li>
 <li class="chapter" data-level="7" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7</b> Model building</a></li>
-<li class="chapter" data-level="8" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>8</b> A caucus-race and a long tale</a></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -122,25 +124,69 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-caucus-race-and-a-long-tale" class="section level1" number="8">
-<h1><span class="header-section-number">Chapter 8</span> A caucus-race and a long tale</h1>
+<div id="model-building" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Model building</h1>
+<p>socialsupport &lt;- gls(value ~ -1 + variable + variable:factor(socsup3) + variable:AgeMRI7T +
+variable:sex + variable:ZICV_mm3, data = coroutcomes_melt, method = “ML,”
+correlation=corSymm(form = ~1 | id), weights = varIdent(form = ~1 | variable))</p>
+<p>Here, we add ‘-1’ to withhold the intercept for ease of interpretation. We add here our main predictor, in this case social support or ‘socsup3,’ as well as our covariates: age, sex, and intracranial volume. We specify an unstructured correlation matrix per individual (‘id’) and for each outcome (‘variable’).</p>
+<p>Now let’s compare our results to performing a univariate analysis:
+socialsupport.univariate &lt;- lm(ZCA1sum ~ factor(socsup3) + AgeMRI7T + sex + ZICV_mm3, data = coroutcomes)</p>
+<p>Let’s compare our estimates:</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+SE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Univariate linear regression
+</td>
+<td style="text-align:right;">
+-0.1155
+</td>
+<td style="text-align:right;">
+0.1636
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Linear regression with unstructured correlation
+</td>
+<td style="text-align:right;">
+-0.1183
+</td>
+<td style="text-align:right;">
+0.1425
+</td>
+</tr>
+</tbody>
+</table>
+<p>As we see here, our univariate analysis resulted in larger standard errors than our multivariate analysis that considers the correlation between outcomes. Therefore, we see more precision and less probability of making a type-I error.</p>
+<p>I hope this tutorial was helpful for you and inspires you to consider performing multivariate analyses over univariate ones when your outcomes are correlated!</p>
+<p>Cheers!</p>
+<ul>
+<li>Emma</li>
+</ul>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Johnson, Richard Arnold, Dean W Wichern, et al. 2014. <em>Applied Multivariate Statistical Analysis</em>. Vol. 6. Pearson London, UK:
-</div>
-<div class="csl-entry">
-Mishra, Akash, KT Harichandrakumar, Binu Vs, Santhosh Satheesh, and N Sreekumaran Nair. 2021. <span>“Multivariate Approach in Analyzing Medical Data with Correlated Multiple Outcomes: An Exploration Using ACCORD Trial Data.”</span> <em>Clinical Epidemiology and Global Health</em>, 100785.
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="model-building.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="convert-our-data-into-a-format-relevant-for-multivariate-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -171,7 +217,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/etwait/correlated-outcomes/edit/master/03-race.Rmd",
+"link": "https://github.com/etwait/correlated-outcomes/edit/master/02-tears.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -179,7 +225,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/etwait/correlated-outcomes/blob/master/03-race.Rmd",
+"link": "https://github.com/etwait/correlated-outcomes/blob/master/02-tears.Rmd",
 "text": null
 },
 "download": null,

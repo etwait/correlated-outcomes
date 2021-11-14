@@ -24,7 +24,7 @@
 <meta name="author" content="Emma L. Twait" />
 
 
-<meta name="date" content="2021-11-11" />
+<meta name="date" content="2021-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,9 +32,9 @@
   
   
 
-<link rel="next" href="the-pool-of-tears.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,9 +53,33 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -73,9 +97,16 @@
 <li><a href="./">Multivariate analysis with correlated outcomes in R</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Down the rabbit-hole</a></li>
-<li class="chapter" data-level="2" data-path="the-pool-of-tears.html"><a href="the-pool-of-tears.html"><i class="fa fa-check"></i><b>2</b> The pool of tears</a></li>
-<li class="chapter" data-level="3" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>3</b> A caucus-race and a long tale</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Multivariate analyses with correlated outcomes</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#running-the-analysis"><i class="fa fa-check"></i><b>1.1</b> Running the analysis</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#lets-specify-the-packages-needed"><i class="fa fa-check"></i><b>1.2</b> Let’s specify the packages needed:</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#lets-set-our-working-directory"><i class="fa fa-check"></i><b>1.3</b> Let’s set our working directory:</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#load-in-our-data"><i class="fa fa-check"></i><b>1.4</b> Load in our data:</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#convert-our-data-into-a-format-relevant-for-multivariate-analysis"><i class="fa fa-check"></i><b>1.5</b> Convert our data into a format relevant for multivariate analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#model-building"><i class="fa fa-check"></i><b>1.6</b> Model building</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>2</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -98,11 +129,91 @@
 <div id="header">
 <h1 class="title">Multivariate analysis with correlated outcomes in R</h1>
 <p class="author"><em>Emma L. Twait</em></p>
-<p class="date"><em>2021-11-11</em></p>
+<p class="date"><em>2021-11-14</em></p>
 </div>
-<div id="down-the-rabbit-hole" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Down the rabbit-hole</h1>
+<div id="multivariate-analyses-with-correlated-outcomes" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Multivariate analyses with correlated outcomes</h1>
+<p>Do you have correlated outcomes but unsure of how to perform multivariate analysis in R? Then you’re in the right place!</p>
+<p>Previous literature has shown the importance of multivariate over univariate analyses when one has multiple correlated outcomes. Multivariate approaches increase the power of the model as well as reducing type I error. <span class="citation">(Johnson, Wichern, et al. 2014; Mishra et al. 2021)</span></p>
+<p>While multivariate analyses have been around for a while, they are not often used in research, perhaps due to lack of awareness and complex mathematical and statistical methods. So, let’s increase awareness. Let’s learn how to perform a multivariate analysis in R! Step by step.</p>
 
+<div id="running-the-analysis" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Running the analysis</h2>
+</div>
+<div id="lets-specify-the-packages-needed" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Let’s specify the packages needed:</h2>
+<p>library(reshape2) ## for the ‘melt’ function
+library(nlme) ## for our multivariate model</p>
+</div>
+<div id="lets-set-our-working-directory" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Let’s set our working directory:</h2>
+<p>setwd()</p>
+</div>
+<div id="load-in-our-data" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Load in our data:</h2>
+<p>coroutcomes &lt;- read.csv(file = “coroutcomes.csv,” header = TRUE)</p>
+</div>
+<div id="convert-our-data-into-a-format-relevant-for-multivariate-analysis" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Convert our data into a format relevant for multivariate analysis</h2>
+<p>coroutcomes_melt &lt;- melt(hippocomplete2_long[, c(“.imp,” “id,” “AgeMRI7T,” “sex,” “ZICV_mm3,” “socsup3,”“depsymptoms,” “emo_ab,” “psy_ab,” “phys_ab,” “sex_ab,” “LE,” “BAI_cat1,” “child_mal,” “ZCA1sum,” “ZCA2sum,” “ZCA3sum,” “ZDGsum,” “ZERCsum,” “ZSUBsum,” “ZTailsum,” “Zbrain_corrected_mm3,” “brain_corrected_mm3,” “Tailsum,” “SUBsum,” “ERCsum,” “DGsum,” “CA3sum,” “CA2sum,” “CA1sum,” “ZHIPPsum,” “HIPPsum,” “HIPP_L,” “HIPP_R”)], measure.vars = c(“ZCA1sum,” “ZCA2sum,” “ZCA3sum,” “ZDGsum,” “ZERCsum,” “ZSUBsum,” “ZTailsum”))</p>
+<p>Here, we are telling R to select our outcomes, that is, seven hippocampal subfields, “ZCA1sum,” “ZCA2sum,” “ZCA3sum,” “ZDGsum,” “ZERCsum,” “ZSUBsum,” “ZTailsum” and creating a new categorical variable called “variable” for them as well as our new outcome variable “value” that holds the values for all subfields.</p>
+</div>
+<div id="model-building" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Model building</h2>
+<p>socialsupport &lt;- gls(value ~ -1 + variable + variable:factor(socsup3) + variable:AgeMRI7T +
+variable:sex + variable:ZICV_mm3, data = coroutcomes_melt, method = “ML,”
+correlation=corSymm(form = ~1 | id), weights = varIdent(form = ~1 | variable))</p>
+<p>Here, we add ‘-1’ to withhold the intercept for ease of interpretation. We add here our main predictor, in this case social support or ‘socsup3,’ as well as our covariates: age, sex, and intracranial volume. We specify an unstructured correlation matrix per individual (‘id’) and for each outcome (‘variable’).</p>
+<p>Now let’s compare our results to performing a univariate analysis:
+socialsupport.univariate &lt;- lm(ZCA1sum ~ factor(socsup3) + AgeMRI7T + sex + ZICV_mm3, data = coroutcomes)</p>
+<p>Let’s compare our estimates:</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+SE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Univariate linear regression
+</td>
+<td style="text-align:right;">
+-0.1155
+</td>
+<td style="text-align:right;">
+0.1636
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Linear regression with unstructured correlation
+</td>
+<td style="text-align:right;">
+-0.1183
+</td>
+<td style="text-align:right;">
+0.1425
+</td>
+</tr>
+</tbody>
+</table>
+<p>As we see here, our univariate analysis resulted in larger standard errors than our multivariate analysis that considers the correlation between outcomes. Therefore, we see more precision and less probability of making a type-I error.</p>
+<p>I hope this tutorial was helpful for you and inspires you to consider performing multivariate analyses over univariate ones when your outcomes are correlated!</p>
+<p>Cheers!</p>
+<ul>
+<li>Emma</li>
+</ul>
+
+</div>
 </div>
             </section>
 
@@ -110,7 +221,7 @@
         </div>
       </div>
 
-<a href="the-pool-of-tears.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

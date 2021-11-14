@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R</title>
-  <meta name="description" content="Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R" />
+  <title>Chapter 6 Convert our data into a format relevant for multivariate analysis | Multivariate analysis with correlated outcomes in R</title>
+  <meta name="description" content="Chapter 6 Convert our data into a format relevant for multivariate analysis | Multivariate analysis with correlated outcomes in R" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R" />
+  <meta property="og:title" content="Chapter 6 Convert our data into a format relevant for multivariate analysis | Multivariate analysis with correlated outcomes in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 A caucus-race and a long tale | Multivariate analysis with correlated outcomes in R" />
+  <meta name="twitter:title" content="Chapter 6 Convert our data into a format relevant for multivariate analysis | Multivariate analysis with correlated outcomes in R" />
   
   
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Emma L. Twait" />
 
 
-<meta name="date" content="2021-11-13" />
+<meta name="date" content="2021-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="model-building.html"/>
-
+<link rel="prev" href="load-in-our-data.html"/>
+<link rel="next" href="model-building.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -53,6 +53,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 
@@ -102,7 +104,7 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="load-in-our-data.html"><a href="load-in-our-data.html"><i class="fa fa-check"></i><b>5</b> Load in our data</a></li>
 <li class="chapter" data-level="6" data-path="convert-our-data-into-a-format-relevant-for-multivariate-analysis.html"><a href="convert-our-data-into-a-format-relevant-for-multivariate-analysis.html"><i class="fa fa-check"></i><b>6</b> Convert our data into a format relevant for multivariate analysis</a></li>
 <li class="chapter" data-level="7" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7</b> Model building</a></li>
-<li class="chapter" data-level="8" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>8</b> A caucus-race and a long tale</a></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -122,25 +124,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-caucus-race-and-a-long-tale" class="section level1" number="8">
-<h1><span class="header-section-number">Chapter 8</span> A caucus-race and a long tale</h1>
-
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Johnson, Richard Arnold, Dean W Wichern, et al. 2014. <em>Applied Multivariate Statistical Analysis</em>. Vol. 6. Pearson London, UK:
-</div>
-<div class="csl-entry">
-Mishra, Akash, KT Harichandrakumar, Binu Vs, Santhosh Satheesh, and N Sreekumaran Nair. 2021. <span>“Multivariate Approach in Analyzing Medical Data with Correlated Multiple Outcomes: An Exploration Using ACCORD Trial Data.”</span> <em>Clinical Epidemiology and Global Health</em>, 100785.
-</div>
-</div>
+<div id="convert-our-data-into-a-format-relevant-for-multivariate-analysis" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Convert our data into a format relevant for multivariate analysis</h1>
+<p>coroutcomes_melt &lt;- melt(hippocomplete2_long[, c(“.imp,” “id,” “AgeMRI7T,” “sex,” “ZICV_mm3,” “socsup3,”“depsymptoms,” “emo_ab,” “psy_ab,” “phys_ab,” “sex_ab,” “LE,” “BAI_cat1,” “child_mal,” “ZCA1sum,” “ZCA2sum,” “ZCA3sum,” “ZDGsum,” “ZERCsum,” “ZSUBsum,” “ZTailsum,” “Zbrain_corrected_mm3,” “brain_corrected_mm3,” “Tailsum,” “SUBsum,” “ERCsum,” “DGsum,” “CA3sum,” “CA2sum,” “CA1sum,” “ZHIPPsum,” “HIPPsum,” “HIPP_L,” “HIPP_R”)], measure.vars = c(“ZCA1sum,” “ZCA2sum,” “ZCA3sum,” “ZDGsum,” “ZERCsum,” “ZSUBsum,” “ZTailsum”))</p>
+<p>Here, we are telling R to select our outcomes, that is, seven hippocampal subfields, “ZCA1sum,” “ZCA2sum,” “ZCA3sum,” “ZDGsum,” “ZERCsum,” “ZSUBsum,” “ZTailsum” and creating a new categorical variable called “variable” for them as well as our new outcome variable “value” that holds the values for all subfields.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="model-building.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="load-in-our-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-building.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -171,7 +166,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/etwait/correlated-outcomes/edit/master/03-race.Rmd",
+"link": "https://github.com/etwait/correlated-outcomes/edit/master/02-tears.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -179,7 +174,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/etwait/correlated-outcomes/blob/master/03-race.Rmd",
+"link": "https://github.com/etwait/correlated-outcomes/blob/master/02-tears.Rmd",
 "text": null
 },
 "download": null,

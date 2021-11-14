@@ -1,0 +1,8 @@
+multivariate-analyses-with-correlated-outcomes
+running-the-analysis
+lets-specify-the-packages-needed
+lets-set-our-working-directory
+load-in-our-data
+convert-our-data-into-a-format-relevant-for-multivariate-analysis
+model-building
+references
