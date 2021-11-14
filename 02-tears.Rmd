@@ -15,7 +15,7 @@ In this use case, we are examining the association between social support and se
 `coroutcomes <- read.csv(file = "coroutcomes.csv", header = TRUE)`
 
 ## Convert our data into a format relevant for multivariate analysis
-`coroutcomes_melt <- melt(hippocomplete2_long[, c(".imp", "id", "AgeMRI7T", "sex", "ZICV_mm3", "socsup3","depsymptoms", "emo_ab", "psy_ab", "phys_ab", "sex_ab", "LE", "BAI_cat1", "child_mal", "ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum", "Zbrain_corrected_mm3", "brain_corrected_mm3", "Tailsum", "SUBsum", "ERCsum", "DGsum", "CA3sum", "CA2sum", "CA1sum", "ZHIPPsum", "HIPPsum", "HIPP_L", "HIPP_R")], measure.vars = c("ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum"))`
+`coroutcomes_melt <- melt(coroutcomes[, c(".imp", "id", "AgeMRI7T", "sex", "ZICV_mm3", "socsup3","depsymptoms", "emo_ab", "psy_ab", "phys_ab", "sex_ab", "LE", "BAI_cat1", "child_mal", "ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum", "Zbrain_corrected_mm3", "brain_corrected_mm3", "Tailsum", "SUBsum", "ERCsum", "DGsum", "CA3sum", "CA2sum", "CA1sum", "ZHIPPsum", "HIPPsum", "HIPP_L", "HIPP_R")], measure.vars = c("ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum"))`
 
 Here, we are telling R to select our outcomes, the seven hippocampal subfields ("ZCA1sum", "ZCA2sum", "ZCA3sum", "ZDGsum", "ZERCsum", "ZSUBsum", "ZTailsum") and creating a new categorical variable called "variable" for them as well as our new outcome variable "value" that holds the values for all subfields.
 
